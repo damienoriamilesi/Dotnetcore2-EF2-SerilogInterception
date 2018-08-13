@@ -1,0 +1,11 @@
+D:\Dev\CoreApp\BethaniePieShop\bin\Debug\netcoreapp2.0\BethaniePieShop.deps.json
+D:\Dev\CoreApp\BethaniePieShop\bin\Debug\netcoreapp2.0\BethaniePieShop.runtimeconfig.json
+D:\Dev\CoreApp\BethaniePieShop\bin\Debug\netcoreapp2.0\BethaniePieShop.runtimeconfig.dev.json
+D:\Dev\CoreApp\BethaniePieShop\bin\Debug\netcoreapp2.0\BethaniePieShop.dll
+D:\Dev\CoreApp\BethaniePieShop\bin\Debug\netcoreapp2.0\BethaniePieShop.pdb
+D:\Dev\CoreApp\BethaniePieShop\obj\Debug\netcoreapp2.0\BethaniePieShop.csprojAssemblyReference.cache
+D:\Dev\CoreApp\BethaniePieShop\obj\Debug\netcoreapp2.0\BethaniePieShop.csproj.CoreCompileInputs.cache
+D:\Dev\CoreApp\BethaniePieShop\obj\Debug\netcoreapp2.0\BethaniePieShop.AssemblyInfoInputs.cache
+D:\Dev\CoreApp\BethaniePieShop\obj\Debug\netcoreapp2.0\BethaniePieShop.AssemblyInfo.cs
+D:\Dev\CoreApp\BethaniePieShop\obj\Debug\netcoreapp2.0\BethaniePieShop.dll
+D:\Dev\CoreApp\BethaniePieShop\obj\Debug\netcoreapp2.0\BethaniePieShop.pdb

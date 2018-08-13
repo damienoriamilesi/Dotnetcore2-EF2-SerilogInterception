@@ -1,0 +1,11 @@
+{
+  "name": "bethaniepieshop",
+  "version": "1.0.0",
+  "description": "dotnet core 2.1 app",
+  "main": "index.js",
+  "author": "me",
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "jquery": "^3.3.1"
+  }
+}

@@ -1,0 +1,28 @@
+@model PieViewModel
+
+<h2>
+    @Model.Title
+</h2>
+
+@foreach(var pie in Model.Pies)
+{
+    <div class="col-md-4">
+        
+       <div class="thumbnail">
+            <!-- <img src="@pie.ImageThumbnailUrl" alt="@pie.ShortDescription" height="150px" /> -->
+            <img src="@pie.ImageThumbnailUrl" alt="@pie.Name" style="height: 210px; width:100%;" />
+            <div class="caption">
+                <h3 class="pull-right">
+                    @pie.Price.ToString("c")
+                </h3>
+                <h3>
+                    <a asp-controller="Pie" asp-action="Details" asp-route-id="@pie.Id">@pie.Name</a>
+
+                </h3>
+                <p>
+                    @pie.LongDescription
+                </p>
+            </div>
+       </div>
+    </div>
+}
