@@ -34,7 +34,7 @@ public class AccountController : Controller
             var result = await _signInManager.PasswordSignInAsync(user, model.Password, false, false);
 
             if(result.Succeeded)
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "Pie");
         }
 
         ModelState.AddModelError("", "User name/password not found");
@@ -55,7 +55,7 @@ public class AccountController : Controller
             var result = await _userManager.CreateAsync(user, model.Password);
 
             if(result.Succeeded)
-                return RedirectToAction("Index", "Home");
+                return RedirectToAction("Index", "Pie");
         }
         return View(model);
     }
@@ -64,6 +64,6 @@ public class AccountController : Controller
     public async Task<IActionResult> Logout(LoginViewModel model)
     {
         await _signInManager.SignOutAsync();
-        return RedirectToAction("Index", "Home");
+        return RedirectToAction("Index", "Pie");
     }
 }
