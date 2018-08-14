@@ -7,7 +7,7 @@ namespace BethaniePieShop.Models
 {
     public class FeedbackRepository : RepositoryBase<Feedback>, IFeedbackRepository
     {
-        public FeedbackRepository(DbContext context) : base(context)
+        public FeedbackRepository(AppDbContext context) : base(context)
         {
         }
     }

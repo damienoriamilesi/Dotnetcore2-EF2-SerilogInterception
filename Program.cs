@@ -28,8 +28,8 @@ namespace BethaniePieShop
             //     .WriteTo.Seq("http://localhost:5341")
             //     .CreateLogger();
 
-            try
-            {
+            // try
+            // {
                 // Log.Information("Getting the motors running...");
 
                 var host = BuildWebHost(args);
@@ -53,15 +53,15 @@ namespace BethaniePieShop
 
                 host.Run();
 
-            }
-            catch (Exception ex)
-            {
-                Log.Fatal(ex, $"Host terminated unexpectedly : {ex.Message}");
-            }
-            finally
-            {
-                Log.CloseAndFlush();
-            }        
+            // }
+            // catch (Exception ex)
+            // {
+            //     Log.Fatal(ex, $"Host terminated unexpectedly : {ex.Message}");
+            // }
+            // finally
+            // {
+            //     Log.CloseAndFlush();
+            // }        
         }
 
         public static IWebHost BuildWebHost(string[] args) =>

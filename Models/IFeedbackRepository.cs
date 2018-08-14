@@ -1,6 +1,9 @@
 ﻿using System.Collections.Generic;
 using BethaniePieShop.Models;
 
-public interface IFeedbackRepository : IRepository<Feedback>
+namespace BethaniePieShop.Models
 {
+    public interface IFeedbackRepository : IRepository<Feedback>
+    {
+    }
 }

@@ -1,3 +1,4 @@
+using BethaniePieShop.Models;
 using BethaniePieShop.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;

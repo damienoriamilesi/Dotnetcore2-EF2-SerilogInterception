@@ -4,10 +4,10 @@
         <title>
             @ViewBag.Title
         </title>
-        <link rel="stylesheet" href="~/content/site.css" />
-        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
         <script src="~/lib/jquery/dist/jquery.min.js"></script>
         <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="~/content/site.css" />
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     </head>
     <body> 
        <nav class="navbar navbar-inverse navbar-fixed-top" role="navigation">
@@ -27,6 +27,9 @@
                <ul class="nav navbar-nav">
                    <li class="active">
                        <a asp-controller="Pie" asp-action="Index" class="navbar-brand">Home</a>
+                    </li>
+                    <li>                       
+                        <a asp-controller="Feedback" asp-action="Index" class="navbar-brand">Feedback</a>
                     </li>
                    <!-- <li><a href="#">Link</a></li> -->
                </ul>

@@ -61,19 +61,6 @@ namespace BethaniePieShop
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory logger)
         {
-            app.Use((context, next) =>
-                                    Task.Run(()=>{
-                                        var sw = new Stopwatch();
-                                        sw.Start();
-                                        next.Invoke();
-                                        sw.Stop();
-                                        LogHelper.Instance.Information(
-                                            "LogError : {MethodName} {ExecutionTime}",
-                                        $"{next.Method.Name}/{context.Request.Path}", sw.Elapsed.TotalSeconds );
-                                        // $"{next.Method.DeclaringType?.Name}/{next.Method.Name} {next.GetMethodInfo().Name}", sw.Elapsed.TotalSeconds );
-                                        //await context.Response.WriteAsync(String.Format("<!-- {0} ms -->", sw.ElapsedMilliseconds));
-                                    }));
-
             app.UseStaticFiles(); //==> www files
             
             if (env.IsDevelopment())
@@ -81,6 +68,19 @@ namespace BethaniePieShop
                 app.UseDeveloperExceptionPage();
                 app.UseStatusCodePages();
             }
+
+            //  app.Use((context, next) =>
+            //                         Task.Run(()=>{
+            //                             var sw = new Stopwatch();
+            //                             sw.Start();
+            //                             next.Invoke();
+            //                             sw.Stop();
+            //                             LogHelper.Instance.Information(
+            //                                 "LogError : {MethodName} {ExecutionTime}",
+            //                             $"{next.Method.Name}/{context.Request.Path}", sw.Elapsed.TotalSeconds );
+            //                             // $"{next.Method.DeclaringType?.Name}/{next.Method.Name} {next.GetMethodInfo().Name}", sw.Elapsed.TotalSeconds );
+            //                             //await context.Response.WriteAsync(String.Format("<!-- {0} ms -->", sw.ElapsedMilliseconds));
+            //                         }));
 
             app.UseMvc(cfg =>
             {
