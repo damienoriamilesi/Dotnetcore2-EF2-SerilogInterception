@@ -8,6 +8,7 @@ using BethaniePieShop.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc.Filters;
 using Microsoft.AspNetCore.Mvc.Internal;
 using Microsoft.EntityFrameworkCore;
@@ -33,24 +34,28 @@ namespace BethaniePieShop
         {     
             services.AddDbContext<AppDbContext>(x => x.UseSqlServer(Configuration["ConnectionString:DefaultConnection"]));
 
-            var assemblies = new [] { Assembly.GetAssembly(typeof(PieRepository)) };
-            var types = assemblies.SelectMany(assembly => assembly.GetTypes().Where(type => !type.IsInterface && type.GetInterfaces().Any(x=>x.FullName.Contains("IRepository"))));
-            foreach (var implementationType in types)
-            {
-                foreach(var interfaceType in implementationType.GetInterfaces())
-                {
-                    services.AddScoped(interfaceType, implementationType);
-                }
-            }
+            services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<AppDbContext>();
 
+            #region Dependency Injection => Scan Assembly
+
+            var assemblies = new [] { Assembly.GetAssembly(typeof(PieRepository)) };
+                    var types = assemblies.SelectMany(assembly => assembly.GetTypes().Where(type => !type.IsInterface && type.GetInterfaces().Any(x=>x.FullName.Contains("IRepository"))));
+                    foreach (var implementationType in types)
+                    {
+                        foreach(var interfaceType in implementationType.GetInterfaces())
+                        {
+                            services.AddScoped(interfaceType, implementationType);
+                        }
+                    }
+
+            // Could be scanned too
             services.AddTransient<DbSeeder>();
 
             // services.AddTransient<IPieRepository, PieRepository>(); // Each call get a new instance
             // services.AddTransient<IFeedbackRepository, FeedbackRepository>(); // Each call get a new instance
             // //services.AddScoped<IPieRepository, PieRepository>(); // Each call get a the existing instance in the HttpRequest Scope
-            
-            // services.AddDbContext<AppDbContext>(x => x.UseSqlServer(Configuration["ConnectionString:DefaultConnection"]));
-
+            #endregion            
+        
             services.AddLogging(logCfg=>{
                 logCfg.AddSeq(Configuration.GetSection("Seq"));
             });
@@ -82,28 +87,13 @@ namespace BethaniePieShop
             //                             //await context.Response.WriteAsync(String.Format("<!-- {0} ms -->", sw.ElapsedMilliseconds));
             //                         }));
 
+
+            app.UseAuthentication();
+
             app.UseMvc(cfg =>
             {
                 cfg.MapRoute("pie", "{controller=pie}/{action=index}/{id?}");
-            });
-
-            // if(env.IsDevelopment())
-            // {
-            //     using(var scope = app.ApplicationServices.CreateScope())
-            //     {
-            //         var services = scope.ServiceProvider;
-            //         try
-            //         {
-            //             var seeder = scope.ServiceProvider.GetService<DbSeeder>();
-            //             seeder.Seed();
-            //         }
-            //         catch (System.Exception)
-            //         {
-            //             throw;
-            //         }
-            //     }
-            // }
-            
+            });            
         }
     }
 }
