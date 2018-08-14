@@ -22,8 +22,12 @@ public class FeedbackController : Controller
     {
         try
         {
-            _feedbackRepository.Add(model);
-            return RedirectToAction("FeedbackComplete");
+            if(ModelState.IsValid)
+            {
+                _feedbackRepository.Add(model);
+                return RedirectToAction("FeedbackComplete");
+            }   
+            return View(model);
         }
         catch (System.Exception)
         {
