@@ -51,9 +51,6 @@ namespace BethaniePieShop
             // Could be scanned too
             services.AddTransient<DbSeeder>();
 
-            // services.AddTransient<IPieRepository, PieRepository>(); // Each call get a new instance
-            // services.AddTransient<IFeedbackRepository, FeedbackRepository>(); // Each call get a new instance
-            // //services.AddScoped<IPieRepository, PieRepository>(); // Each call get a the existing instance in the HttpRequest Scope
             #endregion            
         
             // services.AddLogging(logCfg=>{
@@ -74,10 +71,7 @@ namespace BethaniePieShop
                 app.UseStatusCodePages();
             }
 
-            // logger.AddSeq(Configuration.GetSection("Seq"));
-            // logger.AddSerilog();
-
-             app.Use((context, next) =>
+            app.Use((context, next) =>
                                     Task.Run(()=>{
                                         var sw = new Stopwatch();
                                         sw.Start();
@@ -91,28 +85,10 @@ namespace BethaniePieShop
                                             // var x = next.GetInvocationList();
                                             // logger.AddSeq(Configuration.GetSection("Seq"));
                                             // logger.AddSerilog();
-                                        }
-                                        // LogHelper.Instance.Information(
-                                        //     "LogError : {MethodName} {ExecutionTime}",
-                                        // $"{next.Path}", sw.Elapsed.TotalSeconds );
-                                        // //$"{next.Method.Name}/{context.Request.Path}", sw.Elapsed.TotalSeconds );
-                                        // // $"{next.Method.DeclaringType?.Name}/{next.Method.Name} {next.GetMethodInfo().Name}", sw.Elapsed.TotalSeconds );
-                                        // //await context.Response.WriteAsync(String.Format("<!-- {0} ms -->", sw.ElapsedMilliseconds));
-                                    }));
 
-            //  app.Use((context, next) =>
-            //                         Task.Run(()=>{
-            //                             var sw = new Stopwatch();
-            //                             sw.Start();
-            //                             next.Invoke();
-            //                             sw.Stop();
-            //                             LogHelper.Instance.Information(
-            //                                 "LogError : {MethodName} {ExecutionTime}",
-            //                             $"{next.Path}", sw.Elapsed.TotalSeconds );
-            //                             //$"{next.Method.Name}/{context.Request.Path}", sw.Elapsed.TotalSeconds );
-            //                             // $"{next.Method.DeclaringType?.Name}/{next.Method.Name} {next.GetMethodInfo().Name}", sw.Elapsed.TotalSeconds );
-            //                             //await context.Response.WriteAsync(String.Format("<!-- {0} ms -->", sw.ElapsedMilliseconds));
-            //                         }));
+
+                                        }
+                                    }));
 
             app.UseAuthentication();
 

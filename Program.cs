@@ -78,9 +78,9 @@ namespace BethaniePieShop
             builder.Sources.Clear();
 
             builder
-                // .AddJsonFile("appsettings.Development.json", false, true)
-                // .AddJsonFile("appsettings.json", false, true)
-                .AddJsonFile($"appsettings.{GetEnvName() ?? "Production"}.json", optional: true)
+                .AddJsonFile("appsettings.Development.json", false, true)
+                .AddJsonFile("appsettings.json", false, true)
+                //.AddJsonFile($"appsettings.{GetEnvName() ?? "Production"}.json", optional: true)
                 .AddEnvironmentVariables();
         }
 
