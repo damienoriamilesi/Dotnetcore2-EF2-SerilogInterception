@@ -19,7 +19,7 @@ namespace BethaniePieShop
     {
         public static void Main(string[] args)
         {
-            Log.Logger = LogHelper.Instance;
+            //Log.Logger = LogHelper.Instance;
 
             // new LoggerConfiguration()
             //     .Enrich.FromLogContext()
