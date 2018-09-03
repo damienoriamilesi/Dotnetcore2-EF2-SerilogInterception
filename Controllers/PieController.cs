@@ -1,3 +1,4 @@
+using System.Threading;
 using BethaniePieShop.Models;
 using BethaniePieShop.ViewModels;
 using Microsoft.AspNetCore.Mvc;
@@ -23,6 +24,8 @@ public class PieController : Controller
 
     public IActionResult Details(int id)
     {
+        Thread.Sleep(5000);
+        
         var pie = _pieRepository.Get(id);
         if (pie == null)
         {

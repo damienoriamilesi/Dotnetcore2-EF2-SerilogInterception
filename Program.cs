@@ -78,10 +78,16 @@ namespace BethaniePieShop
             builder.Sources.Clear();
 
             builder
-                .AddJsonFile("appsettings.Development.json", false, true)
-                .AddJsonFile("appsettings.json", false, true)
-                //.AddJsonFile($"appsettings.{Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Production"}.json", optional: true)
+                // .AddJsonFile("appsettings.Development.json", false, true)
+                // .AddJsonFile("appsettings.json", false, true)
+                .AddJsonFile($"appsettings.{GetEnvName() ?? "Production"}.json", optional: true)
                 .AddEnvironmentVariables();
+        }
+
+        private static string GetEnvName()
+        {
+            var env = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
+            return env;
         }
     }
 

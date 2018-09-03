@@ -56,9 +56,9 @@ namespace BethaniePieShop
             // //services.AddScoped<IPieRepository, PieRepository>(); // Each call get a the existing instance in the HttpRequest Scope
             #endregion            
         
-            services.AddLogging(logCfg=>{
-                logCfg.AddSeq(Configuration.GetSection("Seq"));
-            });
+            // services.AddLogging(logCfg=>{
+            //     logCfg.AddSeq(Configuration.GetSection("Seq"));
+            // });
 
             services.AddMvc();
         }
@@ -74,6 +74,32 @@ namespace BethaniePieShop
                 app.UseStatusCodePages();
             }
 
+            // logger.AddSeq(Configuration.GetSection("Seq"));
+            // logger.AddSerilog();
+
+             app.Use((context, next) =>
+                                    Task.Run(()=>{
+                                        var sw = new Stopwatch();
+                                        sw.Start();
+                                        
+                                        next.Invoke();
+                                        
+                                        sw.Stop();
+
+                                        if(sw.Elapsed.TotalSeconds > 4)
+                                        {
+                                            // var x = next.GetInvocationList();
+                                            // logger.AddSeq(Configuration.GetSection("Seq"));
+                                            // logger.AddSerilog();
+                                        }
+                                        // LogHelper.Instance.Information(
+                                        //     "LogError : {MethodName} {ExecutionTime}",
+                                        // $"{next.Path}", sw.Elapsed.TotalSeconds );
+                                        // //$"{next.Method.Name}/{context.Request.Path}", sw.Elapsed.TotalSeconds );
+                                        // // $"{next.Method.DeclaringType?.Name}/{next.Method.Name} {next.GetMethodInfo().Name}", sw.Elapsed.TotalSeconds );
+                                        // //await context.Response.WriteAsync(String.Format("<!-- {0} ms -->", sw.ElapsedMilliseconds));
+                                    }));
+
             //  app.Use((context, next) =>
             //                         Task.Run(()=>{
             //                             var sw = new Stopwatch();
@@ -82,11 +108,11 @@ namespace BethaniePieShop
             //                             sw.Stop();
             //                             LogHelper.Instance.Information(
             //                                 "LogError : {MethodName} {ExecutionTime}",
-            //                             $"{next.Method.Name}/{context.Request.Path}", sw.Elapsed.TotalSeconds );
+            //                             $"{next.Path}", sw.Elapsed.TotalSeconds );
+            //                             //$"{next.Method.Name}/{context.Request.Path}", sw.Elapsed.TotalSeconds );
             //                             // $"{next.Method.DeclaringType?.Name}/{next.Method.Name} {next.GetMethodInfo().Name}", sw.Elapsed.TotalSeconds );
             //                             //await context.Response.WriteAsync(String.Format("<!-- {0} ms -->", sw.ElapsedMilliseconds));
             //                         }));
-
 
             app.UseAuthentication();
 
