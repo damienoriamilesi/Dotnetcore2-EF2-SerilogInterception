@@ -1,8 +1,9 @@
+using BethaniePieShop.Controllers;
 using BethaniePieShop.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
-public class FeedbackController : Controller
+public class FeedbackController : BaseController
 {
     private readonly IFeedbackRepository _feedbackRepository;
     
@@ -11,14 +12,14 @@ public class FeedbackController : Controller
         _feedbackRepository = feedbackRepository;
     }
 
-    public IActionResult Index()
+    public virtual IActionResult Index()
     {
         return View();
     }
 
 
     [HttpPost]
-    public IActionResult Index(Feedback model)
+    public virtual IActionResult Index(Feedback model)
     {
         try
         {
@@ -35,7 +36,7 @@ public class FeedbackController : Controller
         }
     }
 
-    public IActionResult FeedbackComplete()
+    public virtual IActionResult FeedbackComplete()
     {
         return View();
     }

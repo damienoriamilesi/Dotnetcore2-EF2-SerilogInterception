@@ -1,11 +1,12 @@
 using System.Threading.Tasks;
+using BethaniePieShop.Controllers;
 using BethaniePieShop.Models;
 using BethaniePieShop.ViewModels;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
-public class AccountController : Controller
+public class AccountController : BaseController
 {
     private readonly SignInManager<IdentityUser> _signInManager;
     private readonly UserManager<IdentityUser> _userManager;
@@ -16,13 +17,13 @@ public class AccountController : Controller
         _userManager = userManager;
     }
 
-    public IActionResult Login()
+    public virtual IActionResult Login()
     {
         return View();
     }
 
     [HttpPost]
-    public async Task<IActionResult> Login(LoginViewModel model)
+    public virtual async Task<IActionResult> Login(LoginViewModel model)
     {
         if(!ModelState.IsValid)
             return View(model);
@@ -41,13 +42,13 @@ public class AccountController : Controller
         return View(model);
     }
 
-    public IActionResult Register()
+    public virtual IActionResult Register()
     {
         return View();
     }
 
     [HttpPost]
-    public async Task<IActionResult> Register(LoginViewModel model)
+    public virtual async Task<IActionResult> Register(LoginViewModel model)
     {
         if(ModelState.IsValid)
         {
@@ -61,7 +62,7 @@ public class AccountController : Controller
     }
 
     [HttpPost]
-    public async Task<IActionResult> Logout()
+    public virtual async Task<IActionResult> Logout()
     {
         await _signInManager.SignOutAsync();
         return RedirectToAction("Index", "Pie");

@@ -1,10 +1,11 @@
 using System.Threading;
+using BethaniePieShop.Controllers;
 using BethaniePieShop.Models;
 using BethaniePieShop.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 
-public class PieController : Controller
+public class PieController : BaseController
 {
     private readonly IPieRepository _pieRepository;
     public PieController(IPieRepository pieRepository)
@@ -12,7 +13,7 @@ public class PieController : Controller
         _pieRepository = pieRepository;
     }
 
-    public IActionResult Index()
+    public virtual IActionResult Index()
     {
         var model = new PieViewModel();
         model.Title = "Welcome to Bethany's Pie Shop";
@@ -22,10 +23,10 @@ public class PieController : Controller
         return View(model);
     }
 
-    public IActionResult Details(int id)
+    public virtual IActionResult Details(int id)
     {
         Thread.Sleep(5000);
-        
+
         var pie = _pieRepository.Get(id);
         if (pie == null)
         {
@@ -33,6 +34,4 @@ public class PieController : Controller
         }
         return View(pie);
     }
-
-
 }
