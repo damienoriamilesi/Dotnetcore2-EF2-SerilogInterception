@@ -18,23 +18,23 @@ namespace BethaniePieShop
             sw.Stop();
 
             // Log Method, Arguments, execution time...
-            // if (sw.Elapsed.TotalSeconds > 5)
-            // {
+            if (sw.Elapsed.TotalSeconds > 5)
+            {
                 if (invocation.Method.DeclaringType?.BaseType?.IsAssignableFrom(typeof(BaseController)) ?? false)
                 {
                     LogHelper.Instance.Warning(
                         "LogError : {MethodName} {@Arguments} {ExecutionTime}",
                         $"{invocation.Method.DeclaringType?.Name}/{invocation.Method.Name}", invocation.Arguments, sw.Elapsed.TotalSeconds);
                 }
-                else
-                {
-                    LogHelper.Instance.Warning(
-                                        "LogError : {MethodName} {ExecutionTime}",
-                                        $"{invocation.Method.DeclaringType?.Name}/{invocation.Method.Name}", sw.Elapsed.TotalSeconds);
-                }
+                // else
+                // {
+                //     LogHelper.Instance.Warning(
+                //                         "LogError : {MethodName} {ExecutionTime}",
+                //                         $"{invocation.Method.DeclaringType?.Name}/{invocation.Method.Name}", sw.Elapsed.TotalSeconds);
+                // }
 
-                // Log.CloseAndFlush();
-            // }
+                Log.CloseAndFlush();
+            }
 
 
             // var logger = new LoggerConfiguration().WriteTo.Seq("http://localhost:5341").CreateLogger();
