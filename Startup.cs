@@ -70,6 +70,8 @@ namespace BethaniePieShop
 
             services.AddMvc().AddControllersAsServices();
             
+            services.AddApplicationInsightsTelemetry(Configuration);
+
             var b = new Autofac.ContainerBuilder();
             b.Populate(services); 
 
