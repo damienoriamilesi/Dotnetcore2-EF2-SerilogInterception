@@ -77,7 +77,6 @@ namespace BethaniePieShop
                                     .Where(type => type.BaseType ==  typeof(BaseController)).ToArray();
             b.RegisterTypes(controllers).AsSelf().EnableClassInterceptors().InterceptedBy(typeof(LoggerInterceptor));
             
-            // b.RegisterType<PieController>().AsSelf().EnableClassInterceptors().InterceptedBy(typeof(LoggerInterceptor));
             return new AutofacServiceProvider(b.Build());        
         }
 
