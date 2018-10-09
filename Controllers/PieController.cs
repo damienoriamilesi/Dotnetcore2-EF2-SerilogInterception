@@ -25,7 +25,7 @@ public class PieController : BaseController
 
     public virtual IActionResult Details(int id)
     {
-        Thread.Sleep(5000);
+        //Thread.Sleep(5000);
 
         var pie = _pieRepository.Get(id);
         if (pie == null)

@@ -21,21 +21,21 @@ namespace BethaniePieShop
 
             sw.Stop();
 
-            var s = JsonConvert.SerializeObject(invocation.Arguments, Formatting.Indented, new JsonSerializerSettings { ReferenceLoopHandling = ReferenceLoopHandling.Ignore });
+            // var s = JsonConvert.SerializeObject(invocation.Arguments, Formatting.Indented, new JsonSerializerSettings { ReferenceLoopHandling = ReferenceLoopHandling.Ignore });
 
 
 
             // Log Method, Arguments, execution time...
             if (sw.Elapsed.TotalSeconds > 5)
             {
-                TelemetryClient logClient = new TelemetryClient(new Microsoft.ApplicationInsights.Extensibility.TelemetryConfiguration("7b97ded0-325d-4c85-89f7-e88a23e51d39"));
-                logClient.TrackEvent("CustomEvent", 
-                                        new Dictionary<string, string>() 
-                                        { 
-                                            { "MethodName",  $"{invocation.Method.DeclaringType?.Name}/{invocation.Method.Name}"}, 
-                                            { "Arguments",  s},
-                                            { "ExecutionTime",  $"{sw.Elapsed.TotalSeconds} sec."}
-                                        });                
+                // TelemetryClient logClient = new TelemetryClient(new Microsoft.ApplicationInsights.Extensibility.TelemetryConfiguration("7b97ded0-325d-4c85-89f7-e88a23e51d39"));
+                // logClient.TrackEvent("CustomEvent", 
+                //                         new Dictionary<string, string>() 
+                //                         { 
+                //                             { "MethodName",  $"{invocation.Method.DeclaringType?.Name}/{invocation.Method.Name}"}, 
+                //                             { "Arguments",  s},
+                //                             { "ExecutionTime",  $"{sw.Elapsed.TotalSeconds} sec."}
+                //                         });                
                                         
                 if (invocation.Method.DeclaringType?.BaseType?.IsAssignableFrom(typeof(BaseController)) ?? false)
                 {
