@@ -1,3 +1,4 @@
+using System.Linq;
 using System.Threading;
 using BethaniePieShop.Controllers;
 using BethaniePieShop.Models;
@@ -18,9 +19,15 @@ public class PieController : BaseController
         var model = new PieViewModel();
         model.Title = "Welcome to Bethany's Pie Shop";
         var pies = _pieRepository.GetAll();
-        model.Pies = pies;
+        model.Pies = pies.ToList();
 
         return View(model);
+    }
+
+    [HttpPost]
+    public virtual IActionResult Index(PieViewModel viewModel)
+    {
+        return View(viewModel);
     }
 
     public virtual IActionResult Details(int id)

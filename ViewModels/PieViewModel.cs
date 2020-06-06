@@ -6,6 +6,6 @@ namespace BethaniePieShop.ViewModels
     public class PieViewModel
     {
         public string Title { get; set; }
-        public IList<Pie> Pies { get; set; }
+        public List<Pie> Pies { get; set; }
     }
 }

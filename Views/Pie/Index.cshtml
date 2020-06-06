@@ -1,28 +1,35 @@
 @model PieViewModel
 
-<h2>
-    @Model.Title
-</h2>
+    <form asp-controller="Pie" asp-action="Index" method="post">
+        <h2>
+            @Model.Title
+            @*<input type="checkbox" name="parent" id="parent" onchange="toggleCheckboxes()" />*@
+        </h2>
 
-@foreach(var pie in Model.Pies)
-{
-    <div class="col-md-4">
-        
-       <div class="thumbnail">
-            <!-- <img src="@pie.ImageThumbnailUrl" alt="@pie.ShortDescription" height="150px" /> -->
-            <img src="@pie.ImageThumbnailUrl" alt="@pie.Name" style="height: 210px; width:100%;" />
-            <div class="caption">
-                <h3 class="pull-right">
-                    @pie.Price.ToString("c")
-                </h3>
-                <h3>
-                    <a asp-controller="Pie" asp-action="Details" asp-route-id="@pie.Id">@pie.Name</a>
+        @for (int i = 0; i < Model.Pies.Count; i++)
+        {
+            @Html.HiddenFor(model => model.Pies[i].Id)
 
-                </h3>
-                <p>
-                    @pie.LongDescription
-                </p>
+            <div class="col-md-4 col-sm-12">
+
+                <div class="thumbnail">
+
+                    <img src="@Model.Pies[i].ImageThumbnailUrl" alt="@Model.Pies[i].Name" style="height: 210px; width:100%;" />
+                    <div class="caption">
+                        <h3 class="pull-right">
+                            @Model.Pies[i].Price.ToString("c")
+                        </h3>
+                        <h3>
+                            <a asp-controller="Pie" asp-action="Details" asp-route-id="@Model.Pies[i].Id">@Model.Pies[i].Name</a>
+                            <input asp-for="Pies[i].Id" value="Pies[i].Id" type="hidden" />
+                            <input asp-for="@Model.Pies[i].IsPieOfTheWeek" type="checkbox" />
+                        </h3>
+                        <p>
+                            @Model.Pies[i].LongDescription
+                        </p>
+                    </div>
+                </div>
             </div>
-       </div>
-    </div>
-}
+        }
+        <input type="submit" />
+    </form>
