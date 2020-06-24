@@ -98,6 +98,7 @@ namespace BethaniePieShop
 
         static LogHelper()
         {
+            //Instance = new LoggerConfiguration().WriteTo.Seq("http://localhost:5341").CreateLogger();
             Instance = new LoggerConfiguration().WriteTo.Seq("http://localhost:5341").CreateLogger();
         }
     }

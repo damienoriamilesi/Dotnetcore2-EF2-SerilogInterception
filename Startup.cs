@@ -1,9 +1,9 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
-using System.Threading.Tasks;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using Autofac.Extras.DynamicProxy;
@@ -12,13 +12,11 @@ using BethaniePieShop.Models;
 using Castle.DynamicProxy;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc.Filters;
-using Microsoft.AspNetCore.Mvc.Internal;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Logging;
 using Serilog;
 
@@ -55,6 +53,8 @@ namespace BethaniePieShop
                 }
             }
 
+            
+
             // Could be scanned too
             services.AddTransient<DbSeeder>();
             services.AddTransient<LoggerInterceptor>();
@@ -68,18 +68,21 @@ namespace BethaniePieShop
 
             services.AddAutofac();
 
-            services.AddMvc().AddControllersAsServices();
-            
-            //services.AddApplicationInsightsTelemetry(Configuration);
+            services.AddMvc(cfg=>
+            {
+                cfg.EnableEndpointRouting = false;
+            }).AddControllersAsServices();
 
-            var b = new Autofac.ContainerBuilder();
-            b.Populate(services); 
+            services.AddApplicationInsightsTelemetry(Configuration);
+
+            var b = new ContainerBuilder();
+            b.Populate(services);
 
             var controllers = Assembly.GetExecutingAssembly().GetTypes()
-                                    .Where(type => type.BaseType ==  typeof(BaseController)).ToArray();
+                                    .Where(type => type.BaseType == typeof(BaseController)).ToArray();
             b.RegisterTypes(controllers).AsSelf().EnableClassInterceptors().InterceptedBy(typeof(LoggerInterceptor));
-            
-            return new AutofacServiceProvider(b.Build());        
+
+            return new AutofacServiceProvider(b.Build());
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

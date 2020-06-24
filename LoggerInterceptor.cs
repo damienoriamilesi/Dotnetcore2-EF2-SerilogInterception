@@ -1,11 +1,6 @@
-using System.Collections.Generic;
 using System.Diagnostics;
 using BethaniePieShop.Controllers;
 using Castle.DynamicProxy;
-using Microsoft.ApplicationInsights;
-using Microsoft.ApplicationInsights.DataContracts;
-using Microsoft.IdentityModel.Protocols;
-using Newtonsoft.Json;
 using Serilog;
 
 namespace BethaniePieShop

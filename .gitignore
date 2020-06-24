@@ -4,3 +4,7 @@ bin/Debug/netcoreapp2.0/BethaniePieShop.dll
 bin/Debug/netcoreapp2.0/BethaniePieShop.pdb
 obj/Debug/netcoreapp2.0/BethaniePieShop.dll
 obj/Debug/netcoreapp2.0/BethaniePieShop.pdb
+/.vs
+/packages
+/BethaniePieShop.csproj.user
+/Properties/launchSettings.json
